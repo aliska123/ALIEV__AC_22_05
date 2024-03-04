@@ -298,6 +298,10 @@ void addSpecialKS(vector<KS>& KSs) {
     posFloatCheck(am);
     cout << "Working machines: " << endl;
     posFloatCheck(wm);
+    while (wm > am) {
+        cout << "More working machines than maximal amount of machines\nRe-input, please:";
+        posFloatCheck(wm);
+    }
     cout << "Productivity: " << endl;
     posFloatCheck(p);
     addKS(KSs, name, am, wm, p);
@@ -317,12 +321,12 @@ void oAll(vector<pipe>& pipes, vector<KS>& KSs, vector<int>& HLP, vector<int>& H
     cout << "Pipes:\n";
     for (int i = 0; i < HLP.size(); i++) {
         cout << "id: " << i << " ;";
-        outPipe(pipes[i]);
+        outPipe(pipes[HLP[i]]);
     };
     cout << "KSs:\n";
     for (int i = 0; i < HLK.size(); i++) {
         cout << "id: " << i << " ;";
-        outKS(KSs[i]);
+        outKS(KSs[HLK[i]]);
     };
     elog();
 }
@@ -333,7 +337,7 @@ void HLPipes(vector<pipe> pipes, vector<int>& HLP) {
     HLP.clear();
     int opti;
     cout << "1 - all pipes\n2 - choose by id\n3 - choose by name\n4 - choose by maintenance\n";
-    intCheck(opti, 1, 3);
+    intCheck(opti, 1, 4);
     switch (opti) {
     case 1:
     {
@@ -369,6 +373,7 @@ void HLPipes(vector<pipe> pipes, vector<int>& HLP) {
         for (int i = 0;i < pipes.size();i++) {
             if (pipes[i].InMaintenance == im) {
                 HLP.push_back(i);
+                cout << i << HLP[0];
             }
         }
     }
